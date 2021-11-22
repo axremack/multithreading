@@ -76,7 +76,7 @@ public class Student {
 
     // Printing the object
     public void print() {
-        StringBuilder sb = new StringBuilder();
+        /*StringBuilder sb = new StringBuilder();
 
         sb.append(national_id + " - ")
                 .append(firstname + " " + surname + " - ")
@@ -84,6 +84,8 @@ public class Student {
                 .append(pob + "\n")
                 .append("\t" + descr + "\n");
 
-        System.out.println(sb.toString());
+        System.out.println(sb.toString());*/
+
+        System.out.println(national_id);
     }
 }
