@@ -1,13 +1,22 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class StudentGenerator {
+    ArrayList<Student> list;
 
-    public Student generate() {
-        Random rand = new Random();
-        int upperbound = 100;
-        int random_id = rand.nextInt(upperbound);
-        Student s = new Student(random_id);
+    public StudentGenerator() {
+        this.list = new ArrayList<Student>();
+    }
 
-        return s;
+    public ArrayList<Student> generate(int nb) {
+        for (int i = 0; i < nb; i++) {
+            Random rand = new Random();
+            int upperbound = 150000;
+            int random_id = rand.nextInt(upperbound);
+            Student s = new Student(random_id);
+            list.add(s);
+        }
+
+        return list;
     }
 }
