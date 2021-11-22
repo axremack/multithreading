@@ -2,17 +2,16 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class StudentGenerator {
-    ArrayList<Student> list;
+    public static ArrayList<Student> list;
 
     public StudentGenerator() {
-        this.list = new ArrayList<Student>();
+        this.list = new ArrayList<>();
     }
 
-    public ArrayList<Student> generate(int nb) {
+    public static ArrayList<Student> generate(int nb) {
         for (int i = 0; i < nb; i++) {
             Random rand = new Random();
-            int upperbound = 150000;
-            int random_id = rand.nextInt(upperbound);
+            int random_id = rand.nextInt(nb);
             Student s = new Student(random_id);
             list.add(s);
         }
