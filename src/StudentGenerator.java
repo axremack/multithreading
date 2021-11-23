@@ -1,11 +1,16 @@
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Vector;
 
 public class StudentGenerator implements Runnable {
-    public static Vector<Student> list = new Vector<>();
+    public static ArrayList<Student> globalList;
+    public static ArrayList<ArrayList<Student>> sublistList;
 
-    public void generate(int nb) {
+    public StudentGenerator() {
+        this.globalList = new ArrayList<>();
+        this.sublistList = new ArrayList<>();
+    }
+
+    public void generate(int nb, ArrayList<Student> list) {
         for (int i = 0; i < nb; i++) {
             Random rand = new Random();
             int random_id = rand.nextInt(nb);
@@ -16,7 +21,9 @@ public class StudentGenerator implements Runnable {
 
     @Override
     public void run() {
+        ArrayList<Student> sublist = new ArrayList<>();
         int nb = 50000;
-        generate(nb);
+        generate(nb, sublist);
+        sublistList.add(sublist);
     }
 }

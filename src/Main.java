@@ -1,12 +1,10 @@
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class Main {
     public static final int NUMBER_OF_THREADS = 3;
     public static final int ITERATIONS = 10;
     public static Thread[] threads = new Thread[NUMBER_OF_THREADS];
-    public static StudentGenerator sg_sequential = new StudentGenerator();
-    public static StudentGenerator sg_thread = new StudentGenerator();
-
 
     public static void main(String[] args) {
         // Sequential generation performance
@@ -36,9 +34,10 @@ public class Main {
     }
 
     public static long sequentialGeneration(int nb){
+        StudentGenerator sg_sequential = new StudentGenerator();
         long start_time = System.currentTimeMillis();
 
-        sg_sequential.generate(nb);
+        sg_sequential.generate(nb, sg_sequential.globalList);
 
         long end_time = System.currentTimeMillis();
         long diff = end_time - start_time;
@@ -47,6 +46,7 @@ public class Main {
     }
 
     public static long threadedGeneration() throws InterruptedException {
+        StudentGenerator sg_thread = new StudentGenerator();
         long start_time = System.currentTimeMillis();
 
         for (int i = 0; i < NUMBER_OF_THREADS; i++){
@@ -58,8 +58,14 @@ public class Main {
             threads[i].join();
         }
 
+        for (ArrayList<Student> sublist : sg_thread.sublistList){
+            sublist.addAll(sg_thread.globalList);
+        }
+
         long end_time = System.currentTimeMillis();
         long diff = end_time - start_time;
+
+
 
         return diff;
     }
