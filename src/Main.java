@@ -21,7 +21,7 @@ public class Main {
 
 
         // Threaded generation performance
-        /*long threaded_perf = 0;
+        long threaded_perf = 0;
 
         try {
             for (int i = 0; i < ITERATIONS; i++) {
@@ -32,7 +32,7 @@ public class Main {
             System.out.println("Temps d'éxécution multithreadé moyen : " + (threaded_perf) + " millisecondes.\n");
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     public static long sequentialGeneration(int nb){
