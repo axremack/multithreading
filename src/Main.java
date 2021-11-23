@@ -20,9 +20,11 @@ public class Main {
         // Threaded generation of 150000 students
         try {
             long thread_time = threadedGeneration();
+            System.out.println("Temps d'éxécution : " + (thread_time / 1e9) + " secondes.");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
 
 
     }
@@ -39,6 +41,8 @@ public class Main {
     }
 
     public static long threadedGeneration() throws InterruptedException {
+        long start_time = System.nanoTime();
+
         for (int i = 0; i < NUMBER_OF_THREADS; i++){
             threads[i] = new Thread(sg);
             threads[i].start();
@@ -48,6 +52,9 @@ public class Main {
             threads[i].join();
         }
 
-        return 1;
+        long end_time = System.nanoTime();
+        long diff = end_time - start_time;
+
+        return diff;
     }
 }
