@@ -1,18 +1,16 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Vector;
 
 public class StudentGenerator implements Runnable {
-    public static ArrayList<Student> list = new ArrayList<>();
+    public static Vector<Student> list = new Vector<>();
 
     public void generate(int nb) {
         for (int i = 0; i < nb; i++) {
             Random rand = new Random();
             int random_id = rand.nextInt(nb);
             Student s = new Student(random_id);
-
-            synchronized (this) { // Minus 5 seconds without synchronized but exception sometimes...
-                list.add(s);
-            }
+            list.add(s);
         }
     }
 
