@@ -10,7 +10,7 @@ public class StudentGenerator implements Runnable {
             int random_id = rand.nextInt(nb);
             Student s = new Student(random_id);
 
-            synchronized (this) {
+            synchronized (this) { // Minus 5 seconds without synchronized but exception sometimes...
                 list.add(s);
             }
         }

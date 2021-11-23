@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static final int NUMBER_OF_THREADS = 3;
-    public static final int ITERATIONS = 5;
+    public static final int ITERATIONS = 10;
     public static Thread[] threads = new Thread[NUMBER_OF_THREADS];
     public static StudentGenerator sg_sequential = new StudentGenerator();
     public static StudentGenerator sg_thread = new StudentGenerator();
@@ -28,7 +28,7 @@ public class Main {
                 threaded_perf += threadedGeneration();
             }
 
-            //threaded_perf /= ITERATIONS;
+            threaded_perf /= ITERATIONS;
             System.out.println("Temps d'éxécution multithreadé moyen : " + (threaded_perf) + " millisecondes.\n");
         } catch (InterruptedException e) {
             e.printStackTrace();
