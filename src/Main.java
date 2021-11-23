@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Main {
     public static final int NUMBER_OF_THREADS = 3;
     public static Thread[] threads = new Thread[NUMBER_OF_THREADS];
+    public static StudentGenerator sg;
 
     public static void main(String[] args) {
         // Testing student generation
@@ -29,7 +30,7 @@ public class Main {
     public static long sequentialGeneration(int nb){
         long start_time = System.nanoTime();
 
-        ArrayList<Student> list = StudentGenerator.generate(nb);
+        ArrayList<Student> list = sg.generate(nb);
 
         long end_time = System.nanoTime();
         long diff = end_time - start_time;
@@ -39,15 +40,13 @@ public class Main {
 
     public static long threadedGeneration() throws InterruptedException {
         for (int i = 0; i < NUMBER_OF_THREADS; i++){
-            threads[i] = new Thread(new StudentGenerator());
+            threads[i] = new Thread(sg);
             threads[i].start();
         }
 
         for (int i = 0; i < NUMBER_OF_THREADS; i++){
-            System.out.println(i);
             threads[i].join();
         }
-
 
         return 1;
     }
