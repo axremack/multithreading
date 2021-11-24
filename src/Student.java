@@ -75,17 +75,17 @@ public class Student {
     }
 
     // Printing the object
-    public void print() {
-        /*StringBuilder sb = new StringBuilder();
+    public String print() {
+        StringBuilder sb = new StringBuilder();
 
-        sb.append(national_id + " - ")
-                .append(firstname + " " + surname + " - ")
-                .append(dob + " - ")
-                .append(pob + "\n")
-                .append("\t" + descr + "\n");
+        sb.append(national_id + "\n");
+                //.append(firstname + " " + surname + " - ")
+                //.append(dob + " - ")
+                //.append(pob + "\n")
+                //.append("\t" + descr + "\n");
 
-        System.out.println(sb.toString());*/
+        //System.out.println(sb.toString());
 
-        System.out.println(national_id);
+        return sb.toString();
     }
 }

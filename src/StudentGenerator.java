@@ -2,11 +2,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class StudentGenerator implements Runnable {
-    public static ArrayList<Student> globalList;
     public static ArrayList<ArrayList<Student>> sublistList;
 
     public StudentGenerator() {
-        this.globalList = new ArrayList<>();
         this.sublistList = new ArrayList<>();
     }
 

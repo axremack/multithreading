@@ -49,7 +49,7 @@ public class Main {
         StudentGenerator sg_sequential = new StudentGenerator();
         long start_time = System.currentTimeMillis();
 
-        sg_sequential.generate(nb, sg_sequential.globalList);
+        sg_sequential.generate(nb, listMain);
 
         long end_time = System.currentTimeMillis();
         long diff = end_time - start_time;
@@ -71,20 +71,12 @@ public class Main {
         }
 
         for (ArrayList<Student> sublist : sg_thread.sublistList){
-            sublist.addAll(sg_thread.globalList);
-            System.out.println(sg_thread.globalList.size());
+            listMain.addAll(sublist);
         }
 
         long end_time = System.currentTimeMillis();
         long diff = end_time - start_time;
 
-        copyList(sg_thread.globalList);
-
         return diff;
-    }
-
-    public static void copyList(ArrayList<Student> list) {
-        listMain.clear();
-        listMain.addAll(list);
     }
 }
