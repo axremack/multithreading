@@ -5,6 +5,7 @@ public class Main {
     public static final int NUMBER_OF_THREADS = 3;
     public static final int ITERATIONS = 10;
     public static Thread[] threads = new Thread[NUMBER_OF_THREADS];
+    public static ArrayList<Student> listMain = new ArrayList<>();
 
     public static void main(String[] args) {
         // Sequential generation performance
@@ -31,6 +32,17 @@ public class Main {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
+        // Saving to disk
+        try {
+            StudentWriter sw = new StudentWriter("resources/student.txt");
+            sw.saveList(listMain);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     public static long sequentialGeneration(int nb){
@@ -60,13 +72,19 @@ public class Main {
 
         for (ArrayList<Student> sublist : sg_thread.sublistList){
             sublist.addAll(sg_thread.globalList);
+            System.out.println(sg_thread.globalList.size());
         }
 
         long end_time = System.currentTimeMillis();
         long diff = end_time - start_time;
 
-
+        copyList(sg_thread.globalList);
 
         return diff;
+    }
+
+    public static void copyList(ArrayList<Student> list) {
+        listMain.clear();
+        listMain.addAll(list);
     }
 }
