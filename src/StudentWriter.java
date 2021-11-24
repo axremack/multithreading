@@ -5,7 +5,7 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class StudentWriter {
+public class StudentWriter implements Runnable {
     private File file;
     private Writer output;
 
@@ -31,4 +31,7 @@ public class StudentWriter {
         bw.close();
     }
 
+    public void run() {
+        // to do
+    }
 }

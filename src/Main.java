@@ -34,7 +34,7 @@ public class Main {
         }
 
 
-        // Saving to disk
+        // Threaded saving to disk
         try {
             StudentWriter sw = new StudentWriter("resources/student.txt");
             sw.saveList(listMain);
@@ -79,4 +79,24 @@ public class Main {
 
         return diff;
     }
+
+    public static long threadedSaving() throws Exception {
+        StudentWriter sw_threaded = new StudentWriter("resources/student.txt");
+        long start_time = System.currentTimeMillis();
+
+        for (int i = 0; i < NUMBER_OF_THREADS; i++){
+            threads[i] = new Thread(sw_threaded);
+            threads[i].start();
+        }
+
+        for (int i = 0; i < NUMBER_OF_THREADS; i++){
+            threads[i].join();
+        }
+
+        long end_time = System.currentTimeMillis();
+        long diff = end_time - start_time;
+
+        return diff;
+    }
+
 }
