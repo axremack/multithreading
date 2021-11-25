@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class Main {
     public static final int NUMBER_OF_THREADS = 3;
@@ -16,14 +15,12 @@ public class Main {
 
         // Sequential saving to disk and measuring impact on other treatments
         try {
-            threadedSavingPerf();
+            sequentialSavingPerf();
             sequentialGenerationPerf();
             threadedGenerationPerf();
         } catch (Exception e) {
             System.err.println("Error : threaded writing in file failed");
         }
-
-
     }
 
     public static void sequentialGenerationPerf() {
@@ -56,7 +53,6 @@ public class Main {
             for (int i = 0; i < ITERATIONS; i++) {
                 threaded_perf += threadedGeneration();
             }
-
             threaded_perf /= ITERATIONS;
             System.out.println("Temps d'éxécution multithreadé moyen : " + (threaded_perf) + " millisecondes.\n");
         } catch (Exception e) {
@@ -88,7 +84,7 @@ public class Main {
     }
 
 
-    public static void threadedSavingPerf() {
+    public static void sequentialSavingPerf() {
         long threaded_perf = 0;
 
         try {

@@ -1,8 +1,5 @@
 import java.io.*;
-import java.lang.reflect.Array;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.List;
 
 public class StudentWriter {
     private File file;
