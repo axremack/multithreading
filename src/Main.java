@@ -30,18 +30,16 @@ public class Main {
             threaded_perf /= ITERATIONS;
             System.out.println("Temps d'éxécution multithreadé moyen : " + (threaded_perf) + " millisecondes.\n");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.err.println("Error : threaded execution failed");
         }
 
 
         // Threaded saving to disk
         try {
-            StudentWriter sw = new StudentWriter("resources/student.txt");
-            sw.saveList(listMain);
-            StudentWriter sw2 = new StudentWriter("resources/student_serialized.txt");
-            sw2.saveListSerialized(listMain);
+            StudentWriter sw = new StudentWriter("resources/student_serialized.txt");
+            sw.saveListSerialized(listMain);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Error : threaded writing in file failed");
         }
 
 

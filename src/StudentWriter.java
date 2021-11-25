@@ -13,6 +13,7 @@ public class StudentWriter implements Runnable {
         output = new FileWriter(file, StandardCharsets.UTF_8);
     }
 
+    // Not really doing a difficult treatment so no particular interest...
     public void saveList(ArrayList<Student> list) throws Exception{
         BufferedWriter bw = new BufferedWriter(output, 16384);
         StringBuilder sb = new StringBuilder();
@@ -28,7 +29,7 @@ public class StudentWriter implements Runnable {
         bw.close();
     }
 
-    public void saveListSerialized(ArrayList<Student> list) throws Exception{
+    public void saveListSerialized(ArrayList<Student> list) throws Exception {
         FileOutputStream fos = new FileOutputStream(file);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
 
@@ -38,7 +39,6 @@ public class StudentWriter implements Runnable {
 
         oos.flush();
         oos.close();
-
     }
 
     public void run() {
