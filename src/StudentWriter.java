@@ -1,7 +1,4 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.Writer;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
@@ -29,6 +26,19 @@ public class StudentWriter implements Runnable {
 
         bw.write(sb.toString(),0, sb.toString().length());
         bw.close();
+    }
+
+    public void saveListSerialized(ArrayList<Student> list) throws Exception{
+        FileOutputStream fos = new FileOutputStream(file);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+        for(Student s : list){
+            oos.writeObject(s);
+        }
+
+        oos.flush();
+        oos.close();
+
     }
 
     public void run() {
