@@ -9,6 +9,24 @@ public class Main {
 
     public static void main(String[] args) {
         // Sequential generation performance
+        sequentialGenerationPerf();
+
+        // Threaded generation performance
+        threadedGenerationPerf();
+
+        // Sequential saving to disk and measuring impact on other treatments
+        try {
+            threadedSavingPerf();
+            sequentialGenerationPerf();
+            threadedGenerationPerf();
+        } catch (Exception e) {
+            System.err.println("Error : threaded writing in file failed");
+        }
+
+
+    }
+
+    public static void sequentialGenerationPerf() {
         long sequential_perf = 0;
 
         for (int i = 0; i < ITERATIONS; i++) {
@@ -17,32 +35,6 @@ public class Main {
 
         sequential_perf /= ITERATIONS;
         System.out.println("Temps d'éxécution séquentielle moyen : " + (sequential_perf) + " millisecondes.\n");
-
-
-        // Threaded generation performance
-        long threaded_perf = 0;
-
-        try {
-            for (int i = 0; i < ITERATIONS; i++) {
-                threaded_perf += threadedGeneration();
-            }
-
-            threaded_perf /= ITERATIONS;
-            System.out.println("Temps d'éxécution multithreadé moyen : " + (threaded_perf) + " millisecondes.\n");
-        } catch (InterruptedException e) {
-            System.err.println("Error : threaded execution failed");
-        }
-
-
-        // Threaded saving to disk
-        try {
-            StudentWriter sw = new StudentWriter("resources/student_serialized.txt");
-            sw.saveListSerialized(listMain);
-        } catch (Exception e) {
-            System.err.println("Error : threaded writing in file failed");
-        }
-
-
     }
 
     public static long sequentialGeneration(int nb){
@@ -55,6 +47,21 @@ public class Main {
         long diff = end_time - start_time;
 
         return diff;
+    }
+
+    public static void threadedGenerationPerf() {
+        long threaded_perf = 0;
+
+        try {
+            for (int i = 0; i < ITERATIONS; i++) {
+                threaded_perf += threadedGeneration();
+            }
+
+            threaded_perf /= ITERATIONS;
+            System.out.println("Temps d'éxécution multithreadé moyen : " + (threaded_perf) + " millisecondes.\n");
+        } catch (Exception e) {
+            System.err.println("Error : threaded execution failed");
+        }
     }
 
     public static long threadedGeneration() throws InterruptedException {
@@ -80,18 +87,23 @@ public class Main {
         return diff;
     }
 
-    public static long threadedSaving() throws Exception {
-        StudentWriter sw_threaded = new StudentWriter("resources/student.txt");
+
+    public static void threadedSavingPerf() {
+        long threaded_perf = 0;
+
+        try {
+            threaded_perf = sequentialSaving();
+            System.out.println("Temps de sauvegarde séquentiel : " + (threaded_perf) + " millisecondes.\n");
+        } catch (Exception e) {
+            System.err.println("Error : sequential saving failed");
+        }
+    }
+
+    public static long sequentialSaving() throws Exception {
+        StudentWriter sw = new StudentWriter("resources/student_serialized.txt");
         long start_time = System.currentTimeMillis();
 
-        for (int i = 0; i < NUMBER_OF_THREADS; i++){
-            threads[i] = new Thread(sw_threaded);
-            threads[i].start();
-        }
-
-        for (int i = 0; i < NUMBER_OF_THREADS; i++){
-            threads[i].join();
-        }
+        sw.saveListSerialized(listMain);
 
         long end_time = System.currentTimeMillis();
         long diff = end_time - start_time;
