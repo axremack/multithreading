@@ -12,7 +12,7 @@ public class Main {
         long sequential_perf = 0;
 
         for (int i = 0; i < ITERATIONS; i++) {
-            sequential_perf += sequentialGeneration(150000);
+            sequential_perf += sequentialGeneration(15000);
         }
 
         sequential_perf /= ITERATIONS;
@@ -38,6 +38,8 @@ public class Main {
         try {
             StudentWriter sw = new StudentWriter("resources/student.txt");
             sw.saveList(listMain);
+            StudentWriter sw2 = new StudentWriter("resources/student_serialized.txt");
+            sw2.saveListSerialized(listMain);
         } catch (Exception e) {
             e.printStackTrace();
         }

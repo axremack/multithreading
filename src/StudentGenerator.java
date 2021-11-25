@@ -20,7 +20,7 @@ public class StudentGenerator implements Runnable {
     @Override
     public void run() {
         ArrayList<Student> sublist = new ArrayList<>();
-        int nb = 50000;
+        int nb = 5000;
         generate(nb, sublist);
         sublistList.add(sublist);
     }
